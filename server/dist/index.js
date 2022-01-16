@@ -8,6 +8,7 @@ const http_1 = require("http");
 const socket_io_1 = require("socket.io");
 const config_1 = __importDefault(require("config"));
 const logger_1 = __importDefault(require("./utils/logger"));
+const socket_1 = __importDefault(require("./socket"));
 const port = config_1.default.get("port");
 const host = config_1.default.get("host");
 const corsOrigin = config_1.default.get("corsOrigin");
@@ -22,5 +23,6 @@ const io = new socket_io_1.Server(httpServer, {
 app.get("/", (_, res) => res.send(`Server is up and running`));
 httpServer.listen(port, host, () => {
     logger_1.default.info(`http://${host}:${port}`);
+    (0, socket_1.default)({ io });
 });
 //# sourceMappingURL=index.js.map
