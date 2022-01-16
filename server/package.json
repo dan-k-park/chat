@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "watch": "tsc -w",
-    "dev": "nodemon dist/app.js"
+    "dev": "nodemon dist/index.js"
   },
   "devDependencies": {
     "@types/config": "^0.0.41",

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const pino_1 = __importDefault(require("pino"));
 const dayjs_1 = __importDefault(require("dayjs"));
 const log = (0, pino_1.default)({
-    prettifier: true,
+    prettyPrint: true,
     base: {
         pid: false,
     },

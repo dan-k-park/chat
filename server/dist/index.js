@@ -19,8 +19,8 @@ const io = new socket_io_1.Server(httpServer, {
         credentials: true,
     },
 });
-app.get("/", (_, res) => res.send("Server is up"));
+app.get("/", (_, res) => res.send(`Server is up and running`));
 httpServer.listen(port, host, () => {
-    logger_1.default.info("Server is listening");
+    logger_1.default.info(`http://${host}:${port}`);
 });
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=index.js.map
