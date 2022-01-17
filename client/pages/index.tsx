@@ -32,7 +32,9 @@ export default function Home() {
         <div className={styles.usernameWrapper}>
           <div className={styles.usernameInner}>
             <input placeholder="Username" ref={usernameRef} />
-            <button onClick={handleSetUsername}>Start</button>
+            <button className="start" onClick={handleSetUsername}>
+              Start
+            </button>
           </div>
         </div>
       )}

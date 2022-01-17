@@ -23,6 +23,7 @@ const socket = ({ io }) => {
     logger_1.default.info("Sockets enabled");
     io.on(EVENTS.connection, (socket) => {
         logger_1.default.info(`User connected ${socket.id}`);
+        socket.emit(EVENTS.SERVER.ROOMS, rooms);
         socket.on(EVENTS.CLIENT.CREATE_ROOM, ({ roomName }) => {
             console.log({ roomName });
             const roomId = (0, nanoid_1.nanoid)();

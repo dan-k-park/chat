@@ -1,10 +1,16 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import EVENTS from "../config/events";
 import { useSockets } from "../context/socket.context";
+import styles from "../styles/Message.module.css";
 
 const MessagesContainer = () => {
   const { socket, messages, roomId, username, setMessages } = useSockets();
   const newMessageRef = useRef(null);
+  const messageEndRef = useRef(null);
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleSendMessage = () => {
     const message = newMessageRef.current.value;
@@ -32,12 +38,23 @@ const MessagesContainer = () => {
     return <div></div>;
   }
   return (
-    <div>
-      {messages.map(({ message }, index) => {
-        return <p key={index}>{message}</p>;
-      })}
-
-      <div>
+    <div className={styles.wrapper}>
+      <div className={styles.messageList}>
+        {messages.map(({ message, username, time }, index) => {
+          return (
+            <div key={index} className={styles.message}>
+              <div className={styles.messageInner}>
+                <span className={styles.messageSender}>
+                  {username} - {time}
+                </span>
+                <span className={styles.messageBody}>{message}</span>
+              </div>
+            </div>
+          );
+        })}
+        <div ref={messageEndRef} />
+      </div>
+      <div className={styles.messageBox}>
         <textarea
           rows={1}
           placeholder="Tell us what you are thinking"

@@ -6,9 +6,29 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+body {
+  background-image: url("/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: center;
+  height: 100vh;
+}
 a {
   color: inherit;
   text-decoration: none;
+}
+
+button {
+  padding: 0.5rem;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button.start {
+  background-color: blueviolet;
+  white-space: nowrap;
 }
 
 * {
