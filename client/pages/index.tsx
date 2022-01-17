@@ -5,13 +5,18 @@ import { useSockets } from "../context/socket.context";
 
 import RoomsContainer from "../containers/Rooms";
 import MessagesContainer from "../containers/Messages";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
   const { socket, username, setUsername } = useSockets();
   const usernameRef = useRef(null);
 
-  function handleSetUsername() {
+  useEffect(() => {
+    if (usernameRef)
+      usernameRef.current.value = localStorage.getItem("username") || "";
+  }, []);
+
+  const handleSetUsername = () => {
     const value = usernameRef.current.value;
     if (!value) {
       return;
@@ -20,7 +25,7 @@ export default function Home() {
     setUsername(value);
 
     localStorage.setItem("username", value);
-  }
+  };
   return (
     <div>
       {!username && (

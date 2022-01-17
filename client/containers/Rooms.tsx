@@ -36,7 +36,7 @@ const RoomsContainer = () => {
             <button
               disabled={key === roomId}
               title={`Join ${rooms[key].name}`}
-              onClick={handleJoinRoom[key]}
+              onClick={() => handleJoinRoom(key)}
             >
               {rooms[key].name}
             </button>

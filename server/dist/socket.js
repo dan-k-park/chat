@@ -10,6 +10,7 @@ const EVENTS = {
     CLIENT: {
         CREATE_ROOM: "CREATE_ROOM",
         SEND_ROOM_MESSAGE: "SEND_ROOM_MESSAGE",
+        JOIN_ROOM: "JOIN_ROOM",
     },
     SERVER: {
         ROOMS: "ROOMS",
@@ -40,6 +41,10 @@ const socket = ({ io }) => {
                 username,
                 time: `${date.getHours()}:${date.getMinutes()}`,
             });
+        });
+        socket.on(EVENTS.CLIENT.JOIN_ROOM, (roomId) => {
+            socket.join(roomId);
+            socket.emit(EVENTS.SERVER.JOINED_ROOM, roomId);
         });
     });
 };

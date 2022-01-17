@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import io, { Socket } from "socket.io-client";
 import { SOCKET_URL } from "../config/default";
 import EVENTS from "../config/events";
@@ -29,6 +29,13 @@ function SocketsProvider(props: any) {
   const [rooms, setRooms] = useState({});
   const [messages, setMessages] = useState([]);
 
+  // clicking the window will change the tab name back to chat app
+  useEffect(() => {
+    window.onfocus = function () {
+      document.title = "Chat app";
+    };
+  }, []);
+
   socket.on(EVENTS.SERVER.ROOMS, (value) => {
     setRooms(value);
   });
@@ -40,8 +47,13 @@ function SocketsProvider(props: any) {
   });
 
   socket.on(EVENTS.SERVER.ROOM_MESSAGE, ({ message, username, time }) => {
+    // after sending a message, show that there's a new message in the tab if the tab isn't in focus
+    if (!document.hasFocus()) {
+      document.title = "New message...";
+    }
     setMessages([...messages, { message, username, time }]);
   });
+
   return (
     <SocketContext.Provider
       value={{
